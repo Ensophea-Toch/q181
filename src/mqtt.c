@@ -65,31 +65,31 @@ static void onTopicMessageArrived(MessageData* md)
 	buf[m->payloadlen] = 0;
 	MAINLOG_L1("recv message:%s", buf);
 
-	AppPlayTip(buf);
+//	AppPlayTip(buf);
 
 	// Analyze the message body
-	{
-		cJSON *root;
-		cJSON *obj;
-
-		root = cJSON_Parse((char *)buf);
-		if (root == NULL)
-			return;
-
-		obj = cJSON_GetObjectItem(root, "type");
-		if (obj == NULL) {
-			cJSON_Delete(root);
-			return;
-		}
-
-		if (strcmp(obj->valuestring, "TB") == 0) {
-			// Transaction Broadcast
-			obj = cJSON_GetObjectItem(root, "msg");
-			MAINLOG_L1("Test alert",obj);
-			if (obj != NULL)
-				AppPlayTip(obj->valuestring);
-				MAINLOG_L1(444444444444444,obj);
-		}
+//	{
+//		cJSON *root;
+//		cJSON *obj;
+//
+//		root = cJSON_Parse((char *)buf);
+//		if (root == NULL)
+//			return;
+//
+//		obj = cJSON_GetObjectItem(root, "type");
+//		if (obj == NULL) {
+//			cJSON_Delete(root);
+//			return;
+//		}
+//
+//		if (strcmp(obj->valuestring, "TB") == 0) {
+//			// Transaction Broadcast
+//			obj = cJSON_GetObjectItem(root, "msg");
+//			MAINLOG_L1("Test alert",obj);
+//			if (obj != NULL)
+//				AppPlayTip(obj->valuestring);
+//				MAINLOG_L1(444444444444444,obj);
+//		}
 //		else if (strcmp(obj->valuestring, "UN") == 0) {
 //			// Update Notification
 //			set_tms_download_flag(1);
@@ -130,7 +130,7 @@ static void onTopicMessageArrived(MessageData* md)
 //
 //				memcpy(&mp3File[countMP3][0], obj->valuestring+num, loc);
 //				MAINLOG_L1("file name: %s",mp3File[countMP3]);
-////				PlayMP3File(mp3File[countMP3]);
+//				PlayMP3File(mp3File[countMP3]);
 //				playMp3Test();
 //				PlayMp3ListTest();
 //				num=num+loc+1;
@@ -164,8 +164,8 @@ static void onTopicMessageArrived(MessageData* md)
 //			}
 //
 //		}
-		cJSON_Delete(root);
-	}
+//		cJSON_Delete(root);
+//	}
 }
 
 static unsigned char pSendBuf[1024];
@@ -178,7 +178,7 @@ void mQTTMainThread(void)
 	MQTTClient c;
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 
-	AppPlayTip("4");
+//	AppPlayTip("4");
 
 	memset(&c, 0, sizeof(MQTTClient));
 	MQTTClientInit(&c, &n, 20000, pSendBuf, 1024, pReadBuf, 1024);

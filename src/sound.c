@@ -12,7 +12,7 @@
 
 void AppPlayTip(char *tip)
 {
-	PlaySound_Api((unsigned char *)tip, G_sys_param.sound_level, 10);
+	PlaySound_Api((unsigned char *)tip, G_sys_param.sound_level, 9);
 }
 
 void PlayMP3File(char *audioFileName){
@@ -25,8 +25,9 @@ void PlayMP3File(char *audioFileName){
 	MAINLOG_L1("MP3 Path is %s",filePath);
 
 	while(1){
-		ret = audioFilePlayPath_lib("/ext/Success_01.mp3");
-		MAINLOG_L1("123456789",ret);
+		ttsSetVolume_lib(4);
+		ret = audioFilePlayPath_lib(filePath);
+
 		if (ret==0){
 			MAINLOG_L1("test==0");
 			break;

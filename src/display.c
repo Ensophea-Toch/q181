@@ -48,10 +48,10 @@ void QRCodeDisp()
 
 void DispMainFace(void)
 {
-	playMp3Test();
+//	playMp3Test();
 	ScrCls_Api();
-	ScrDisp_Api(LINE4, 0, "Welcome to use", CDISP);
-	ScrDisp_Api(LINE5, 0, "Aisino Q161", CDISP);
+//	ScrDisp_Api(LINE4, 0, "Welcome to use", CDISP);
+//	ScrDisp_Api(LINE5, 0, "Aisino Q161", CDISP);
 }
 
 
@@ -161,7 +161,7 @@ int CustomizedQR()
 
 	ScrCls_Api();
 //	playMp3Test();
-	PlayMp3ListTest();
+//	PlayMp3ListTest();
 
 	ret = ScrDispImage_Api(KHQRBMP, 0, 0);
 
@@ -235,6 +235,7 @@ void SelectMainMenu(void)
 			CustomizedQR();
 			break;
 		case DIGITAL3:
+			PlayMP3File("Fail_01.mp3");
 			CustomizedQR2();
 			break;
 

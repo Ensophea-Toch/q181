@@ -64,7 +64,7 @@ void initParam(void){
 		G_sys_param.mqtt_qos = 0;
 		G_sys_param.mqtt_keepalive = 60;
 		strcpy(G_sys_param.mqtt_topic, "test");
-		strcpy(G_sys_param.mqtt_client_id, "mqttx_b626fc98");
+		strcpy(G_sys_param.mqtt_client_id, "mqttx_78978d08");
 
 	//	strcpy(G_sys_param.mqtt_server, "broker.hivemq.com");
 	//	strcpy(G_sys_param.mqtt_port, "1883");
