@@ -37,7 +37,7 @@ void InitSys(void)
 	initDeviceType();
 
 	// Turn off WIFI and turn on 4G network
-	NetModuleOper_Api(WIFI, 0);
+	NetModuleOper_Api(WIFI, 1);
 	NetModuleOper_Api(GPRS, 1);
 
 	// Network initialization
@@ -67,6 +67,7 @@ void InitSys(void)
 int AppMain(int argc, char **argv)
 {
 	int ret;
+	int wif;
 	int signal_lost_count;
 	int mobile_network_registered;
 
@@ -85,31 +86,35 @@ int AppMain(int argc, char **argv)
 		ret = NetLinkCheck_Api(GPRS);
 		MAINLOG_L1("*******************4G status:%d",ret);
 
-		if (ret == 2) {
-			Delay_Api(60000);
-			SysPowerReBoot_Api();
-		}
-		else if (ret == 1) {
-			if (signal_lost_count > 10) {
-				Delay_Api(60000);
-				SysPowerReBoot_Api();
-			}
+		wif = NetLinkCheck_Api(WIFI);
+		MAINLOG_L1("*******************WIFI status:%d",wif);
 
-			AppPlayTip("Mobile network registration in progress");
 
-			Delay_Api(3000);
-			signal_lost_count++;
-			mobile_network_registered = 0;
-			continue;
-		}
-		else {
-			signal_lost_count = 0;
-
-			if (mobile_network_registered == 0) {
-				mobile_network_registered = 1;
-				//AppPlayTip("Mobile network registered");
-			}
-		}
+//		if (ret == 2) {
+//			Delay_Api(60000);
+//			SysPowerReBoot_Api();
+//		}
+//		else if (ret == 1) {
+//			if (signal_lost_count > 10) {
+//				Delay_Api(60000);
+//				SysPowerReBoot_Api();
+//			}
+//
+//			AppPlayTip("Mobile network registration in progress");
+//
+//			Delay_Api(3000);
+//			signal_lost_count++;
+//			mobile_network_registered = 0;
+//			continue;
+//		}
+//		else {
+//			signal_lost_count = 0;
+//
+//			if (mobile_network_registered == 0) {
+//				mobile_network_registered = 1;
+//				//AppPlayTip("Mobile network registered");
+//			}
+//		}
 
 		mQTTMainThread();
 	}
