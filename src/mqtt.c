@@ -65,7 +65,8 @@ static void onTopicMessageArrived(MessageData* md)
 	buf[m->payloadlen] = 0;
 	MAINLOG_L1("recv message:%s", buf);
 
-	AppPlayTip(buf);
+//	AppPlayTip(buf);
+	PlayMP3File("Success_01.mp3");
 
 	// Analyze the message body
 //	{

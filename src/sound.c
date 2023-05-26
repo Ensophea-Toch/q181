@@ -25,7 +25,7 @@ void PlayMP3File(char *audioFileName){
 	MAINLOG_L1("MP3 Path is %s",filePath);
 
 	while(1){
-//		ttsSetVolume_lib(4);
+//		ttsSetVolume_lib(5);
 		ret = audioFilePlayPath_lib(filePath);
 
 		if (ret==0){
