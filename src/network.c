@@ -1,7 +1,7 @@
 /*
  * network.c
  *
- *  Created on: 2021Äê10ÔÂ14ÈÕ
+ *  Created on: 2021ï¿½ï¿½10ï¿½ï¿½14ï¿½ï¿½
  *      Author: vanstone
  */
 #include <stdio.h>
@@ -16,6 +16,7 @@
 
 //int wirelessPdpOpen_lib(void);
 int wirelessPppOpen_lib(unsigned char *pucApn, unsigned char *pucUserName, unsigned char *pucPassword) ;
+int wirelessCheckPdpDial_lib(int timeout);
 int wirelessCheckPppDial_lib(void); //int wirelessCheckPdpDial_lib(int timeout);
 int wirelessPppClose_lib(void) ;//int wirelessPdpRelease_lib(void);
 int wirelessSocketCreate_lib(int nProtocol);
@@ -97,6 +98,8 @@ void *net_connect(void* attch, const char *host,const char *port, int timerOutMs
 	int i;
 	u8 CerBuf[CERTI_LEN];
 	int timeid = 0;
+	ret=wirelessCheckPdpDial_lib(timerOutMs);
+	MAINLOG_L1("wirelessCheckPdpDial_lib = %d" , ret );
 	
 	timeid = TimerSet_Api();
 	while(1)

@@ -190,7 +190,6 @@ void mQTTMainThread(void)
 	n.mqttclose = net_close;
 	n.mqttread = net_read;
 	n.mqttwrite = net_write;
-
 	n.netContext = n.mqttconnect(NULL, G_sys_param.mqtt_server, G_sys_param.mqtt_port, 10000, G_sys_param.mqtt_ssl, &err);
 	if (n.netContext == NULL)
 	{
@@ -206,7 +205,9 @@ void mQTTMainThread(void)
 	data.keepAliveInterval = G_sys_param.mqtt_keepalive;
 	data.cleansession = 1;
 
+
 	ret = MQTTConnect(&c, &data);
+	MAINLOG_L1("MQTTConnect() status: %d", ret);
 	if (ret != 0) {
 		MQTTDisconnect(&c);
 		n.mqttclose(n.netContext);
@@ -214,6 +215,9 @@ void mQTTMainThread(void)
 	}
 
 	ret = MQTTSubscribe(&c, G_sys_param.mqtt_topic, G_sys_param.mqtt_qos, onTopicMessageArrived);
+
+	MAINLOG_L1("MQTTSubscribe() status: %d", ret);
+
 	if (ret != 0) {
 		MQTTDisconnect(&c);
 		n.mqttclose(n.netContext);

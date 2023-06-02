@@ -21,7 +21,7 @@ const APP_MSG App_Msg = {
 };
 
 void MenuThread();
-//function();
+function();
 /*
 *******************************Connect Wifi*******************************
 */
@@ -33,22 +33,22 @@ unsigned short *RecLen;
 int ret,ret2;
 ret = Connect();
 
-//ret2 = CommTxd_Api("1", 1, 0);
-//
-//memset(RecBuff, 0, sizeof(RecBuff));
-//ret2 = CommRxd_Api(RecBuff, &RecLen, 1, 0, 5000);
-//TipAndWaitEx_Api("CommRxd_Api = %02x", ret2);
-//
-//CommClose_Api();
-//
-//return 0;
+ret2 = CommTxd_Api("1", 1, 0);
+
+memset(RecBuff, 0, sizeof(RecBuff));
+ret2 = CommRxd_Api(RecBuff, &RecLen, 1, 0, 5000);
+TipAndWaitEx_Api("CommRxd_Api = %02x", ret2);
+
+CommClose_Api();
+
+return 0;
 }
 
 int Connect(void) {
 	MAINLOG_L1("Wifi Connected 1");
     int ret;
 
-	#define _HOSTIP_ "172.17.200.231"
+	#define _HOSTIP_ "172.17.201.100"
 	#define _HOSTPORT_ "1883"
 //    EXTERN struct _COMMPARASTRUC_ G_CommPara;
     struct _COMMPARASTRUC_ G_CommPara;
@@ -63,10 +63,10 @@ int Connect(void) {
     strcpy((char *) G_CommPara.WifiSet.WpaPsk, "acleda123*");  //the password of your wifi
     G_CommPara.WifiSet.Dhcp = 1;
 
-    strcpy((char *) G_CommPara.NetSet.NetServerIp, _HOSTIP_);   //the ip address you want to connect
-    strcpy((char *) G_CommPara.NetSet.NetServerPort, _HOSTPORT_);  //the commport of the ip address
-    strcpy((char *) G_CommPara.NetSet.NetServer2Ip, _HOSTIP_);
-    strcpy((char *) G_CommPara.NetSet.NetServer2Port, _HOSTPORT_);
+//    strcpy((char *) G_CommPara.NetSet.NetServerIp, _HOSTIP_);   //the ip address you want to connect
+//    strcpy((char *) G_CommPara.NetSet.NetServerPort, _HOSTPORT_);  //the commport of the ip address
+//    strcpy((char *) G_CommPara.NetSet.NetServer2Ip, _HOSTIP_);
+//    strcpy((char *) G_CommPara.NetSet.NetServer2Port, _HOSTPORT_);
 
     G_CommPara.CurCommMode = WIFI;
 //    SaveCommParam();    //this function is not necessary
@@ -117,7 +117,7 @@ void InitSys(void) {
     initDeviceType();
 
     // Turn off WIFI and turn on 4G network
-    NetModuleOper_Api(WIFI, 0);
+    NetModuleOper_Api(WIFI, 1);
     NetModuleOper_Api(GPRS, 1);
 
     // Network initialization
