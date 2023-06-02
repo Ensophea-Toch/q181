@@ -58,13 +58,13 @@ void initParam(void){
 
 	readSN(G_sys_param.sn);
 
-		strcpy(G_sys_param.mqtt_server, "broker.emqx.io");
+		strcpy(G_sys_param.mqtt_server, "103.25.92.104"); //3.82.39.163
 		strcpy(G_sys_param.mqtt_port, "1883");
 		G_sys_param.mqtt_ssl = 0;
 		G_sys_param.mqtt_qos = 0;
 		G_sys_param.mqtt_keepalive = 60;
-		strcpy(G_sys_param.mqtt_topic, "test");
-		strcpy(G_sys_param.mqtt_client_id, "mqttx_78978d08");
+		strcpy(G_sys_param.mqtt_topic, "bus_02");
+		strcpy(G_sys_param.mqtt_client_id, "emqx_MzU5ND");//mqttx_78978d08
 
 	//	strcpy(G_sys_param.mqtt_server, "broker.hivemq.com");
 	//	strcpy(G_sys_param.mqtt_port, "1883");
