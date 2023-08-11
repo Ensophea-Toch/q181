@@ -98,7 +98,7 @@ void *net_connect(void* attch, const char *host,const char *port, int timerOutMs
 	int i;
 	u8 CerBuf[CERTI_LEN];
 	int timeid = 0;
-	ret=wirelessCheckPdpDial_lib(timerOutMs);
+//	ret=wirelessCheckPdpDial_lib(timerOutMs);
 	MAINLOG_L1("wirelessCheckPdpDial_lib = %d" , ret );
 	
 	timeid = TimerSet_Api();

@@ -50,6 +50,7 @@ void DispMainFace(void)
 {
 //	playMp3Test();
 	ScrCls_Api();
+
 //	ScrDisp_Api(LINE4, 0, "Welcome to use", CDISP);
 //	ScrDisp_Api(LINE5, 0, "Aisino Q161", CDISP);
 }
@@ -136,7 +137,8 @@ void MenuThread()
 	int Result = 0;
 	while(1)
 	{
-		DispMainFace();
+//		DispMainFace();
+		CustomizedQR();
 		Result = WaitEvent();
 		if(Result == 0xfe)
 			continue;
@@ -230,12 +232,12 @@ void SelectMainMenu(void)
 #endif			
 			break;
 		case DIGITAL2:
-			PlayMP3File("Success_01.mp3");
+//			PlayMP3File("Success_01.mp3");
 //			PlayMp3ListTest();
 			CustomizedQR();
 			break;
 		case DIGITAL3:
-			PlayMP3File("Fail_01.mp3");
+//			PlayMP3File("Fail_01.mp3");
 			CustomizedQR2();
 			break;
 
