@@ -120,6 +120,7 @@ void InitSys(void) {
     NetModuleOper_Api(WIFI, 1);
     NetModuleOper_Api(GPRS, 1);
 
+
     // Network initialization
     net_init();
 
