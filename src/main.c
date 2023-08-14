@@ -22,38 +22,38 @@ const APP_MSG App_Msg = {
 
 
 void MenuThread();
+
 function();
+
 /*
 *******************************Connect Wifi*******************************
 */
 
-int function (void)
-{
-unsigned char *RecBuff;
-unsigned short *RecLen;
-int ret,ret2;
-ret = Connect();
+int function(void) {
+    unsigned char *RecBuff;
+    unsigned short *RecLen;
+    int ret, ret2;
+    ret = Connect();
 
-ret2 = CommTxd_Api("1", 1, 0);
+    ret2 = CommTxd_Api("1", 1, 0);
 
-memset(RecBuff, 0, sizeof(RecBuff));
-ret2 = CommRxd_Api(RecBuff, &RecLen, 1, 0, 5000);
-TipAndWaitEx_Api("CommRxd_Api = %02x", ret2);
+    memset(RecBuff, 0, sizeof(RecBuff));
+    ret2 = CommRxd_Api(RecBuff, &RecLen, 1, 0, 5000);
+    TipAndWaitEx_Api("CommRxd_Api = %02x", ret2);
 
-CommClose_Api();
+    CommClose_Api();
 
-return 0;
+    return 0;
 }
 
 int Connect(void) {
-	MAINLOG_L1("Wifi Connected 1");
+    MAINLOG_L1("Wifi Connected 1");
     int ret;
 
-	#define _HOSTIP_ "172.17.201.100"
-	#define _HOSTPORT_ "1883"
+#define _HOSTIP_ "172.17.201.100"
+#define _HOSTPORT_ "1883"
 //    EXTERN struct _COMMPARASTRUC_ G_CommPara;
     struct _COMMPARASTRUC_ G_CommPara;
-
 
 
     memset(&G_CommPara, 0, sizeof(struct _COMMPARASTRUC_));
@@ -73,7 +73,7 @@ int Connect(void) {
 //    SaveCommParam();    //this function is not necessary
 
     ret = CommModuleInit_Api(&G_CommPara);
-    MAINLOG_L1("Wifi Connected",ret);
+    MAINLOG_L1("Wifi Connected", ret);
 
     CommParamSet_Api(&G_CommPara);
     WaitAnyKey_Api(3);
@@ -96,7 +96,6 @@ void SaveCommParam(void) {
         result = WriteFile_Api(COMMPARAMFILE, (u8 * ) & G_CommPara, 0, sizeof(struct _COMMPARASTRUC_));
     } while (result != 0);
 }
-
 
 
 /*
@@ -126,7 +125,6 @@ void InitSys(void) {
 
     // MQTT client initialization
     initMqttOs();
-
 
 
     memset(bp, 0, sizeof(bp));
@@ -161,6 +159,7 @@ int AppMain(int argc, char **argv) {
 
     signal_lost_count = 0;
     mobile_network_registered = 0;
+
 
     while (1) {
 

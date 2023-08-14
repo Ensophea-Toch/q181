@@ -63,8 +63,8 @@ void initParam(void){
 		G_sys_param.mqtt_ssl = 0;
 		G_sys_param.mqtt_qos = 0;
 		G_sys_param.mqtt_keepalive = 60;
-		strcpy(G_sys_param.mqtt_topic, "bus_02");
-		strcpy(G_sys_param.mqtt_client_id, "emqx_MzU5ND");//mqttx_78978d08
+		strcpy(G_sys_param.mqtt_topic, G_sys_param.sn);
+		strcpy(G_sys_param.mqtt_client_id, G_sys_param.sn);//mqttx_78978d08
 
 	//	strcpy(G_sys_param.mqtt_server, "broker.hivemq.com");
 	//	strcpy(G_sys_param.mqtt_port, "1883");
