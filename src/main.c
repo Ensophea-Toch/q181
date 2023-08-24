@@ -126,7 +126,7 @@ int AppMain(int argc, char **argv) {
 //				SysPowerReBoot_Api();
 			}
 
-			AppPlayTip("Mobile network registration in progress");
+//			AppPlayTip("Mobile network registration in progress");
 
 			Delay_Api(3000);
 			signal_lost_count++;
