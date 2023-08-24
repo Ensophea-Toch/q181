@@ -12,6 +12,8 @@
 #include <struct.h>
 #include <poslib.h>
 
+
+
 #define QRBMP "QRBMP.bmp"
 #define LOGOBMP "LOGO.bmp"
 #define KHQRBMP "/ext/3-0029.jpg"
@@ -154,7 +156,8 @@ int CustomizedQR() {
 //	PlayMp3ListTest();
 
     ret = ScrDispImage_Api(KHQRBMP, 0, 0);
-    ScrFontSetEx_Api(2);
+//    ScrFontSetEx_Api(2);
+    ScrDisp_Api(10, 0, "City Bus State-07", CDISP);
     ScrDisp_Api(11, 0, "3-0029", CDISP);
 
     while (1) {
@@ -162,19 +165,26 @@ int CustomizedQR() {
         switch (key) {
             case PGUP:
                 if (G_sys_param.sound_level >= 5)
-                    AppPlayTip("This is the maximum volume");
+
+//                    AppPlayTip("This is the maximum volume");
+                	PlayMP3File("Max_sound.mp3");
                 else {
                     G_sys_param.sound_level++;
-                    AppPlayTip("Increased");
+                    ttsSetVolume_lib(G_sys_param.sound_level);
+//                    AppPlayTip("Increased");
+                    PlayMP3File("Increase.mp3");
                     saveParam();
                 }
                 continue;
             case PGDWON:
                 if (G_sys_param.sound_level <= 1)
-                    AppPlayTip("This is the minimum volume");
+//                    AppPlayTip("This is the minimum volume");
+                	PlayMP3File("Min_sound.mp3");
                 else {
                     G_sys_param.sound_level--;
-                    AppPlayTip("Decreased");
+                    ttsSetVolume_lib(G_sys_param.sound_level);
+//                    AppPlayTip("Decreased");
+                    PlayMP3File("Decrease.mp3");
                     saveParam();
                 }
                 continue;
@@ -201,19 +211,23 @@ int CustomizedQR2() {
         switch (key) {
             case PGUP:
                 if (G_sys_param.sound_level >= 5)
-                    AppPlayTip("This is the maximum volume");
+//                    AppPlayTip("This is the maximum volume");
+                	PlayMP3File("Max_sound_adr.mp3");
                 else {
                     G_sys_param.sound_level++;
-                    AppPlayTip("Increased");
+//                    AppPlayTip("Increased");
+                    PlayMP3File("Increase_adr.mp3");
                     saveParam();
                 }
                 continue;
             case PGDWON:
                 if (G_sys_param.sound_level <= 1)
-                    AppPlayTip("This is the minimum volume");
+//                    AppPlayTip("This is the minimum volume");
+                	PlayMP3File("Min_sound_adr.mp3");
                 else {
                     G_sys_param.sound_level--;
-                    AppPlayTip("Decreased");
+//                    AppPlayTip("Decreased");
+                    PlayMP3File("Decrease_adr.mp3");
                     saveParam();
                 }
                 continue;

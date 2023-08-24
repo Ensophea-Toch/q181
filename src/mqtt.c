@@ -224,7 +224,7 @@ void mQTTMainThread(void)
 		return;
 	}
 
-	AppPlayTip("Connected ABC");
+	PlayMP3File("IoT_Sucess_connect.mp3");
 
 	while (1) {
 		ret = MQTTYield(&c, 200);

@@ -58,7 +58,7 @@ void initParam(void){
 
 	readSN(G_sys_param.sn);
 
-		strcpy(G_sys_param.mqtt_server, "103.25.92.104"); //3.82.39.163
+		strcpy(G_sys_param.mqtt_server, "103.83.163.69"); //3.82.39.163
 		strcpy(G_sys_param.mqtt_port, "1883");
 		G_sys_param.mqtt_ssl = 0;
 		G_sys_param.mqtt_qos = 0;
@@ -77,7 +77,7 @@ void initParam(void){
 		G_sys_param.mqtt_qos = 0;
 		G_sys_param.mqtt_keepalive = 60;
 
-	G_sys_param.sound_level = 1;
+	//G_sys_param.sound_level = 1;
 
 	saveParam();
 }

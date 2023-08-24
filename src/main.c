@@ -23,68 +23,11 @@ const APP_MSG App_Msg = {
 
 void MenuThread();
 
-function();
 
 /*
 *******************************Connect Wifi*******************************
 */
 
-int function(void) {
-    unsigned char *RecBuff;
-    unsigned short *RecLen;
-    int ret, ret2;
-    ret = Connect();
-
-    ret2 = CommTxd_Api("1", 1, 0);
-
-    memset(RecBuff, 0, sizeof(RecBuff));
-    ret2 = CommRxd_Api(RecBuff, &RecLen, 1, 0, 5000);
-    TipAndWaitEx_Api("CommRxd_Api = %02x", ret2);
-
-    CommClose_Api();
-
-    return 0;
-}
-
-int Connect(void) {
-    MAINLOG_L1("Wifi Connected 1");
-    int ret;
-
-#define _HOSTIP_ "172.17.201.100"
-#define _HOSTPORT_ "1883"
-//    EXTERN struct _COMMPARASTRUC_ G_CommPara;
-    struct _COMMPARASTRUC_ G_CommPara;
-
-
-    memset(&G_CommPara, 0, sizeof(struct _COMMPARASTRUC_));
-
-    strcpy((char *) G_CommPara.WifiSet.SSID, "ACLEDA-GUEST"); //the name of your wifi
-    G_CommPara.WifiSet.SecurityType = 3;
-    G_CommPara.WifiSet.EncryptType = 3;
-    strcpy((char *) G_CommPara.WifiSet.WpaPsk, "acleda123*");  //the password of your wifi
-    G_CommPara.WifiSet.Dhcp = 1;
-
-//    strcpy((char *) G_CommPara.NetSet.NetServerIp, _HOSTIP_);   //the ip address you want to connect
-//    strcpy((char *) G_CommPara.NetSet.NetServerPort, _HOSTPORT_);  //the commport of the ip address
-//    strcpy((char *) G_CommPara.NetSet.NetServer2Ip, _HOSTIP_);
-//    strcpy((char *) G_CommPara.NetSet.NetServer2Port, _HOSTPORT_);
-
-    G_CommPara.CurCommMode = WIFI;
-//    SaveCommParam();    //this function is not necessary
-
-    ret = CommModuleInit_Api(&G_CommPara);
-    MAINLOG_L1("Wifi Connected", ret);
-
-    CommParamSet_Api(&G_CommPara);
-    WaitAnyKey_Api(3);
-
-    ret = CommStart_Api();
-
-    ret = CommCheck_Api(30);
-    TipAndWaitEx_Api("CommCheck_Api = %d", ret);
-
-    return 0;
-}
 
 #define COMMPARAMFILE   "CommParamFile"
 //struct COMMPARASTRUC G_CommPara;
@@ -117,7 +60,7 @@ void InitSys(void) {
     initDeviceType();
 
     // Turn off WIFI and turn on 4G network
-    NetModuleOper_Api(WIFI, 1);
+    NetModuleOper_Api(WIFI, 0);
     NetModuleOper_Api(GPRS, 1);
 
 
@@ -137,7 +80,7 @@ void InitSys(void) {
     MAINLOG_L1("lib Version == %d, version: %s", ret, bp);
     MAINLOG_L1("APP Version == version: %s", App_Msg.Version);
 
-    ret = fibo_thread_create(MenuThread, "mainMenu", 14 * 1024, NULL, 24);
+    ret = fibo_thread_create(MenuThread, "mainMenu", 14 * 1024, NULL, 1);
     MAINLOG_L1("fibo_thread_create: %d", ret);
 
     //check if any app to update
@@ -172,33 +115,35 @@ int AppMain(int argc, char **argv) {
         MAINLOG_L1("*******************WIFI status:%d", wif);
 
 
-//		if (ret == 2) {
-//			Delay_Api(60000);
+		if (ret == 2) {
+			PlayMP3File("Insert sim.mp3");
+			Delay_Api(60000);
 //			SysPowerReBoot_Api();
-//		}
-//		else if (ret == 1) {
-//			if (signal_lost_count > 10) {
-//				Delay_Api(60000);
+		}
+		else if (ret == 1) {
+			if (signal_lost_count > 10) {
+				Delay_Api(60000);
 //				SysPowerReBoot_Api();
-//			}
-//
-//			AppPlayTip("Mobile network registration in progress");
-//
-//			Delay_Api(3000);
-//			signal_lost_count++;
-//			mobile_network_registered = 0;
-//			continue;
-//		}
-//		else {
-//			signal_lost_count = 0;
-//
-//			if (mobile_network_registered == 0) {
-//				mobile_network_registered = 1;
-//				//AppPlayTip("Mobile network registered");
-//			}
-//		}
+			}
+
+			AppPlayTip("Mobile network registration in progress");
+
+			Delay_Api(3000);
+			signal_lost_count++;
+			mobile_network_registered = 0;
+			continue;
+		}
+		else {
+			signal_lost_count = 0;
+
+			if (mobile_network_registered == 0) {
+				mobile_network_registered = 1;
+				//AppPlayTip("Mobile network registered");
+			}
+		}
 
         mQTTMainThread();
+        PlayMP3File("IoT_Server_down.mp3");
     }
 
     return 0;
