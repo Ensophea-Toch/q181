@@ -16,7 +16,7 @@
 
 #define QRBMP "QRBMP.bmp"
 #define LOGOBMP "LOGO.bmp"
-#define KHQRBMP "/ext/3-0111.jpg"
+#define KHQRBMP "/ext/3-0317.jpg"
 #define USDQRBMP "/ext/USD_QR.bmp"
 
 void QRlogo() {
@@ -158,7 +158,7 @@ int CustomizedQR() {
     ret = ScrDispImage_Api(KHQRBMP, 0, 0);
 //    ScrFontSetEx_Api(2);
     ScrDisp_Api(10, 0, "City Bus State-07", CDISP);
-    ScrDisp_Api(11, 0, "3-0111", CDISP);
+    ScrDisp_Api(11, 0, "3-0317", CDISP);
 
     while (1) {
         key = WaitAnyKey_Api(60);
